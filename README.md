@@ -27,4 +27,4 @@ Head to the URL `HTTP://localhost:5002` on your browser of choice. This has only
 
 From there, a menu will appear to add your first inventory item. Ensure all fields are filled and add the new item. You can edit and delete the item later, so don't worry about making any mistakes.
 
-Once you have an inventory to your liking, it can be downloaded as a CSV using the export button on the main page.
+Any deleted items can be commented on and later be recovered if you choose to do so.
