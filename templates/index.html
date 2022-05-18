@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script type="text/javascript">
+      function isNumberDotKey(txt, evt) {
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        if (charCode == 46) {
+          //Check if the text already contains the . character
+          if (txt.value.indexOf('.') === -1) {
+            return true;
+          } else {
+            return false;
+          }
+        } else {
+          if (charCode > 31 && (charCode < 48 || charCode > 57)) return false;
+        }
+        return true;
+      }
+    </script>
+    <script type="text/javascript">
+      function isNumberKey(txt, evt) {
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        if (charCode == 46) {
+          //Check if the text already contains the . character
+          if (txt.value.indexOf('.') === -1) {
+            return false;
+          } else {
+            return false;
+          }
+        } else {
+          if (charCode > 31 && (charCode < 48 || charCode > 57)) return false;
+        }
+        return true;
+      }
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+      .addition-textboxes {
+        margin-bottom: 7px;
+      }
+
+      .flash-alerts {
+        margin-left: -40px;
+        background-color: tomato;
+      }
+
+      td {
+        padding: 0 10px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      .inventory-column {
+        float: left;
+        padding: 20px;
+        min-width: 600px;
+      }
+
+      .addition-column {
+        float: right;
+        padding: 20px;
+        height: 80vh;
+        width: 20vw;
+        min-width: 300px;
+        margin-top: 40px;
+      }
+
+      /* Clear floats after the columns */
+      .row:after {
+        content: "";
+        display: table;
+        clear: both;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="inventory-column">
+      <h1>Shop Iffy(TM Pending) Inventory Tracker</h1>
+        <h2>Current Inventory</h2> {% if inventoryInfo != [] %} <table>
+          <tbody>
+            <tr>
+              <td>{{ header[0] }}</td>
+              <td>{{ header[1] }}</td>
+              <td>{{ header[2] }}</td>
+              <td>{{ header[3] }}</td>
+              <td>{{ header[4] }}</td>
+			  <td>{{ header[5] }}</td>
+              <td>{{ header[6] }}</td>
+			  <td>{{ header[7] }}</td>
+            </tr> {% for value in inventoryInfo%} <tr>
+			<form action={{ value[6] }} id="theform{{ value[5][-1] }}">
+              <td>{{ value[0] }}</td>
+              <td>{{ value[1] }}</td>
+              <td>{{ value[2] }}</td>
+              <td>{{ value[3] }}</td>
+              <td>{{ value[4] }}</td>
+              <td>
+                <a href={{ value[5] }}>
+                  <button type="button" style="height:20px;width:45px">Edit</button>
+                </a>
+			  </td>
+				  <td>
+					<a>
+					  <button form="theform{{ value[5][-1] }}" type="submit" style="height:20px;width:75px">Delete</button>
+					</a>
+				  </td>
+				  <td>
+					<a>
+					  <input form="theform{{ value[5][-1] }}" type="text" style="height:20px;width:75px" name="comment"></input>
+					</a>
+				  </td>
+            </form> </tr> {% endfor %}
+          </tbody>
+        </table> {% endif %} {% if inventoryInfo == [] %} <h3>Currently Empty</h3> {% endif %}
+		<h2>Recently Deleted</h2> {% if deletedInfo != [] %} <table>
+          <tbody>
+            <tr>
+              <td>{{ delheader[0] }}</td>
+              <td>{{ delheader[1] }}</td>
+              <td>{{ delheader[2] }}</td>
+              <td>{{ delheader[3] }}</td>
+              <td>{{ delheader[4] }}</td>
+              <td>{{ delheader[5] }}</td>
+              <td>{{ delheader[6] }}</td>
+            </tr> {% for value in deletedInfo%} <tr>
+              <td>{{ value[0] }}</td>
+              <td>{{ value[1] }}</td>
+              <td>{{ value[2] }}</td>
+              <td>{{ value[3] }}</td>
+              <td>{{ value[4] }}</td>
+              <td>{{ value[5] }}</td>
+              <td>
+                <a href={{ value[6] }}>
+                  <button style="height:20px;width:85px">Un-Delete</button>
+                </a>
+              </td>
+            </tr> {% endfor %}
+          </tbody>
+        </table> {% endif %} {% if deletedInfo == [] %} <h3>Currently Empty</h3> {% endif %}
+      </div>
+    </div>
+    <div class="addition-column" style="background-color:#bbb;">
+      <h2>Add New Item</h2> {% with messages = get_flashed_messages() %} {% if messages %} <ul class=flashes> {% for message in messages %} <p class=flash-alerts>{{ message }}</p> {% endfor %} </ul> {% endif %} {% endwith %} <form method="post" class="form-vertical" action="/add">
+        <div>
+          <td>
+            <input type="text" name="item_name" placeholder="Item Name" size="30" maxlength="30" class="addition-textboxes">
+          </td>
+        </div>
+        <div>
+          <td>
+            <input type="text" name="item_amount" id="item_amount" placeholder="Item Amount" size="30" maxlength="30" onkeypress="return isNumberKey(this, event);" class="addition-textboxes">
+          </td>
+        </div>
+        <div>
+          <td>
+            <input type="text" name="SKU" id="SKU" placeholder="SKU" size="30" maxlength="30" class="addition-textboxes">
+          </td>
+        </div>
+        <div>
+          <td>
+            <input type="text" name="price" id="price" placeholder="Price Per Unit (2 Decimals Max)" size="30" maxlength="30" onkeypress="return isNumberDotKey(this, event);" class="addition-textboxes" ;>
+          </td>
+        </div>
+        <div>
+          <button type="submit">Submit</button>
+      </form>
+    </div>
+    </div>
+  </body>
+</html>
