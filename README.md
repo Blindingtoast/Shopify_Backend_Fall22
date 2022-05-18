@@ -1,4 +1,4 @@
-# Shopify Backend Intern Summer 2022 Application
+# Shopify Backend Intern Fall 2022 Application
 
 A web application coded in Python for inventory management. Utilizes all CRUD functionality along with the CSV export feature.
 
