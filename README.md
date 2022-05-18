@@ -23,7 +23,7 @@ Begin by going navigating to the directory containing Main.py through the comman
 py Main.py
 ```
 
-Head to the URL `HTTP://localhost:5000` on your browser of choice. This has only been tested on Chrome and Firefox and may not work with older browsers.
+Head to the URL `HTTP://localhost:5002` on your browser of choice. This has only been tested on Chrome and Firefox and may not work with older browsers.
 
 From there, a menu will appear to add your first inventory item. Ensure all fields are filled and add the new item. You can edit and delete the item later, so don't worry about making any mistakes.
 
