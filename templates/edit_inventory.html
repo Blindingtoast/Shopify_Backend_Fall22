@@ -1,0 +1,79 @@
+<html>
+  <head>
+    <title>Edit Page - Inventory Information</title>
+    <style>
+      table,
+      th,
+      td {
+        border: 1px solid black;
+        border-collapse: collapse;
+      }
+
+      .edit-table {
+        margin-bottom: 10px;
+      }
+    </style>
+    <script type="text/javascript">
+      function isNumberDotKey(txt, evt) {
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        if (charCode == 46) {
+          //Check if the text already contains the . character
+          if (txt.value.indexOf('.') === -1) {
+            return true;
+          } else {
+            return false;
+          }
+        } else {
+          if (charCode > 31 && (charCode < 48 || charCode > 57)) return false;
+        }
+        return true;
+      }
+    </script>
+    <script type="text/javascript">
+      function isNumberKey(txt, evt) {
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        if (charCode == 46) {
+          //Check if the text already contains the . character
+          if (txt.value.indexOf('.') === -1) {
+            return false;
+          } else {
+            return false;
+          }
+        } else {
+          if (charCode > 31 && (charCode < 48 || charCode > 57)) return false;
+        }
+        return true;
+      }
+    </script>
+  </head>
+  <body>
+    <h1>Edit Inventory Item</h1>
+    <form method="post" class="form-vertical">
+      <table style="width:50%" class="edit-table">
+        <tbody>
+          <tr>
+            <td>{{ header[0] }}</td>
+            <td>{{ header[1] }}</td>
+            <td>{{ header[2] }}</td>
+            <td>{{ header[3] }}</td>
+          </tr>
+          <tr>
+            <td>
+              <input type="text" name="item_name" placeholder="Item Name" size="30" maxlength="30" value="{{ inventoryInfo[0] }}">
+            </td>
+            <td>
+              <input type="text" name="item_amount" id="item_amount" placeholder="Item Amount" size="30" maxlength="30" onkeypress="return isNumberKey(this, event);" value={{ inventoryInfo[1] }}>
+            </td>
+            <td>
+              <input type="text" name="SKU" id="SKU" placeholder="SKU" size="30" maxlength="30" value="{{ inventoryInfo[2] }}">
+            </td>
+            <td>
+              <input type="text" name="price" id="price" placeholder="Price Per Unit (2 Decimals Max)" size="30" maxlength="30" onkeypress="return isNumberDotKey(this, event);" value="{{ inventoryInfo[3] }}">
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <button type="submit">Submit</button>
+    </form>
+  </body>
+</html>
